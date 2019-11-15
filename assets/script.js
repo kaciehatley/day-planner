@@ -8,12 +8,36 @@ window.onload = function() {
     $('#currentDay').html(date);
 }
 
-workHours = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+var workHours = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+var $container = $(".container");
 
-for (var i=0; i<workHours.length; i++) {
-    $('.container').append("<div class='row'><div class='col-sm-1 hour'>");
-    $('.hour').html(workHours[i]);
-    // $('.hour').text(workHours[i]);
-    // $('.row').append('<div class="col-sm-10 past description">');
-    // $('.row').append('<div class="col-sm-1 saveBtn">');
-}
+$.each(workHours, function (index, value) {
+    var $newRow = $("<div>").addClass("row");
+    var $newCol1 = $("<div>" + value + "</div>").addClass("col-sm-1 hour");
+    var $newCol2 = $("<div></div>").addClass("col-sm-10 past description");
+    var $newCol3 = $("<div></div>").addClass("col-sm-1 saveBtn");
+    var textarea = $('<textarea></textarea>');
+    var icon = $('<i class="far fa-save fa-3x" style="margin: auto; padding: 10px;"></i>');
+    $newRow.append($newCol1);
+    $newRow.append($newCol2);
+    $newCol2.append(textarea);
+    $newRow.append($newCol3);
+    $newCol3.append(icon);
+    $container.append($newRow);
+})
+
+// for(var i=0; i < workHours.length; i++) {
+//     console.log(workHours[i]);
+//     $('.container').append("<div class='row'><div class='col-sm-1 hour'>");
+//     $('.hour').html(workHours[i]);
+// }
+
+// $.each(workHours, function (index, value) {
+//     console.log(workHours);
+//     var currentVal = value;
+//     function hoursValue() {
+//         return value;
+//     };
+//     $('.container').append("<div class='row'><div class='col-sm-1 hour'>");
+//     $('.hour').html(currentVal);
+// })
