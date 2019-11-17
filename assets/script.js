@@ -8,15 +8,39 @@ window.onload = function() {
     $('#currentDay').html(date);
 }
 
-var workHours = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+var now = moment().hour();
+
+var workHours = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
 var $container = $(".container");
 
 $.each(workHours, function (index, value) {
+    var i = index;
+    console.log(i);
+
+    boxHour = "";
+    if (value <= 11) {
+        boxHour = value + "AM"
+    } else if (value > 12) {
+        boxHour = (value-12) + "PM";
+    } else if (value = 12) {
+        boxHour = value + "PM";
+    }
+
     var $newRow = $("<div>").addClass("row");
-    var $newCol1 = $("<div>" + value + "</div>").addClass("col-sm-1 hour");
-    var $newCol2 = $("<div></div>").addClass("col-sm-10 past description");
+    var $newCol1 = $("<div>" + boxHour + "</div>").addClass("col-sm-1 hour");
     var $newCol3 = $("<div></div>").addClass("col-sm-1 saveBtn");
     var textarea = $('<textarea></textarea>');
+
+
+    if (value==now) {
+        var $newCol2 = $("<div></div>").addClass("col-sm-10 present description");
+    } else if (value < now) {
+        var $newCol2 = $("<div></div>").addClass("col-sm-10 past description");
+    } else if (value > now) {
+        var $newCol2 = $("<div></div>").addClass("col-sm-10 future description");
+    }
+    
+    // var textarea = $('<textarea></textarea>').attr("data-index", workHours[index]);
     var icon = $('<i class="far fa-save fa-3x" style="margin: auto; padding: 10px;"></i>');
     $newRow.append($newCol1);
     $newRow.append($newCol2);
@@ -26,18 +50,7 @@ $.each(workHours, function (index, value) {
     $container.append($newRow);
 })
 
-// for(var i=0; i < workHours.length; i++) {
-//     console.log(workHours[i]);
-//     $('.container').append("<div class='row'><div class='col-sm-1 hour'>");
-//     $('.hour').html(workHours[i]);
-// }
+// set data attributes for each text area
 
-// $.each(workHours, function (index, value) {
-//     console.log(workHours);
-//     var currentVal = value;
-//     function hoursValue() {
-//         return value;
-//     };
-//     $('.container').append("<div class='row'><div class='col-sm-1 hour'>");
-//     $('.hour').html(currentVal);
-// })
+
+// 
