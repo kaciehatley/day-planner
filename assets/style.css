@@ -12,12 +12,10 @@ body {
     border-left: 1px solid black;
     padding: 22px;
     width: 100%;
-    /* ?? */
   }
   
   .jumbotron {
     text-align: center;
-    /* background-color: lightgray; */
     background-image: url("witewall_3.png");
     color: black;
     border-radius: 0;

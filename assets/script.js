@@ -6,13 +6,6 @@ window.onload = function() {
     var currentMonth = months[monthNum];
     var date = (currentMonth+' '+today.getDate()+', '+today.getFullYear());
     $('#currentDay').html(date);
-    this.localStorage.setItem("date", date);
-    var storedDate = localStorage.getItem("date");
-    // All text areas clear out at midnight
-    if (storedDate !== date) {
-        window.localStorage.clear();
-        window.location.reload();
-    }
 };
 
 // Current time
@@ -34,7 +27,6 @@ function currentTime() {
     var time = regularTime + ":" + today.getMinutes() + ":" + today.getSeconds() + amOrPM;
     $('#currentTime').html("The current time is: " + time);
 }
-
 setInterval(currentTime, 1000);
 
 
@@ -42,10 +34,10 @@ setInterval(currentTime, 1000);
 var now = moment().hour();
 
 // Variables to store work hours and container that will store new elements
-var workHours = ["9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
+var workHours = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
 var $container = $(".container");
 
-// Loop for each row
+// Loop for each new row
 $.each(workHours, function (index, value) {
     // The index of each row and all of its elements equals current index of item in workHours array
     var i = index;
@@ -77,10 +69,8 @@ $.each(workHours, function (index, value) {
     }
 
     // Appends all new elements
-    $newRow.append($newCol1);
-    $newRow.append($newCol2);
+    $newRow.append($newCol1).append($newCol2).append($newCol3);
     $newCol2.append(textarea);
-    $newRow.append($newCol3);
     $newCol3.append(icon);
     $container.append($newRow);
 
