@@ -3,16 +3,46 @@ window.onload = function() {
     var today = new Date();
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var monthNum = today.getMonth();
-    currentMonth = months[monthNum];
+    var currentMonth = months[monthNum];
     var date = (currentMonth+' '+today.getDate()+', '+today.getFullYear());
     $('#currentDay').html(date);
+    this.localStorage.setItem("date", date);
+    var storedDate = localStorage.getItem("date");
+    // All text areas clear out at midnight
+    if (storedDate !== date) {
+        window.localStorage.clear();
+        window.location.reload();
+    }
+};
+
+// Current time
+function currentTime() {
+    var today = new Date();
+    var currentHour = today.getHours();
+    var regularTime = 0;
+    var amOrPM = "";
+    if (currentHour <= 11) {
+        regularTime = currentHour;
+        amOrPM = " AM"
+    } else if (currentHour > 12) {
+        regularTime = (currentHour-12);
+        amOrPM = " PM";
+    } else if (currentHour = 12) {
+        regularTime = currentHour;
+        amOrPM = " PM";
+    }
+    var time = regularTime + ":" + today.getMinutes() + ":" + today.getSeconds() + amOrPM;
+    $('#currentTime').html("The current time is: " + time);
 }
+
+setInterval(currentTime, 1000);
+
 
 // Variable for current time
 var now = moment().hour();
 
 // Variables to store work hours and container that will store new elements
-var workHours = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
+var workHours = ["9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
 var $container = $(".container");
 
 // Loop for each row
@@ -65,4 +95,10 @@ $.each(workHours, function (index, value) {
         var content = element.parentNode.parentNode.querySelector(".input").value;
         localStorage.setItem(i, content);
     })
+});
+
+// This button clears all data
+$('.clearBtn').on("click", function() {
+    window.localStorage.clear();
+    window.location.reload();
 })
