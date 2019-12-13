@@ -1,5 +1,7 @@
 # Day Planner
 
+[Link to deployed project](https://kaciehatley.github.io/day-planner)
+
 ## About the Project
 This day planner was created with the intention of helping the user with time-management and organization skills. This day planner creates a textarea for each hour of the standard workday. Users can edit and save text within each text box. The project utilizes HTML, CSS, JavaScript and third-party APIs such as jQuery. This is the fifth project built as a part of the UNCC Coding Bootcamp.
 
